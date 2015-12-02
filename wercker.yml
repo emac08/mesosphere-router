@@ -2,14 +2,14 @@ box: debian:jessie
 build:
   steps:
     - install-packages:
-      packages: wget build-essential libreadline-dev libncurses5-dev libpcre3-dev libssl-dev sed
+        packages: wget build-essential libreadline-dev libncurses5-dev
     - script:
         name: install ngx
         code: |
-          wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz \
+          wget http://openresty.org/download/ngx_openresty-1.7.10.1.ta
             && tar xvfz ngx_openresty-1.7.10.1.tar.gz \
             && cd ngx_openresty-1.7.10.1 \
-            && ./configure --with-luajit --with-http_gzip_static_module  --with-http_ssl_module \
+            && ./configure --with-luajit --with-http_gzip_static_modul
             && make \
             && make install \
             && rm -rf /ngx_openresty*
@@ -21,7 +21,7 @@ build:
         code: cp template.sh $WERCKER_OUTPUT_DIR
     - script:
         name: cp config & chmod
-        code: cp nginx.conf app.lua /usr/local/openresty/nginx/conf/ && chmod a+r /usr/local/openresty/nginx/conf/*
+        code: cp nginx.conf app.lua /usr/local/openresty/nginx/conf/ &
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
